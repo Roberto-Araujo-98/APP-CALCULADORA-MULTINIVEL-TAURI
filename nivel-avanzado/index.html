@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Avanzada Rok</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-black to-slate-900 min-h-screen flex items-center justify-center p-4">
+
+   <div id="calc-card" class="w-full max-w-[490px] bg-slate-900/90 rounded-2xl p-5 border border-blue-500/30 shadow-[0_0_30px_rgba(30,58,138,0.4)] transition-all">
+    <!-- Busca tu contenedor principal y asegúrate de que tenga este id -->
+
+        <!-- Barra de navegación (Estilo Neon Pills) -->
+    <nav class="flex justify-around bg-black/50 rounded-xl p-1.5 mb-5 border border-slate-800">
+    <a href="../" class="text-slate-400 hover:text-blue-400 text-xs md:text-sm font-medium px-3 py-1.5 rounded-lg transition-all">Inicio</a>
+    <a href="../nivel-basico/" class="text-slate-400 hover:text-blue-400 text-xs md:text-sm font-medium px-3 py-1.5 rounded-lg transition-all">Básico</a>
+    
+    <!-- El botón activo se queda en su tercer lugar de siempre, pero con el ID que agregaste -->
+    <a href="#" id="nav-active-pill" class="bg-blue-600 text-white text-xs md:text-sm font-semibold px-4 py-1.5 rounded-lg shadow-[0_0_10px_rgba(37,99,235,0.5)]">Avanzado</a>
+    
+    <a href="../nivel-cientifico/" class="text-slate-500 text-xs md:text-sm font-medium px-3 py-1.5 rounded-lg cursor-not-allowed">Científico</a>
+</nav>
+
+        <!-- Pantalla de visualización (Matrix High-Contrast) -->
+        <div class="bg-black/80 rounded-xl p-4 mb-4 border border-slate-800 shadow-[inset_0_2px_10px_rgba(0,0,0,0.9)] text-right overflow-hidden">
+            <div id="history" class="text-blue-500/70 text-xs md:text-sm h-5 font-mono tracking-wide"></div>
+            <div id="display" class="text-blue-400 text-3xl md:text-4xl font-light font-mono tracking-tight truncate mt-1">0</div>
+        </div>
+
+        <!-- Matriz de Botones de Ingeniería Fija -->
+        <div class="grid grid-cols-6 gap-2 auto-rows-[46px] md:auto-rows-[52px]">
+            <!-- Fila 1 -->
+            <button class="btn switchable text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-blue-950/40 hover:border-blue-500/50 rounded-lg text-xs md:text-sm transition-all" data-key="sin" data-sec="asin" data-lbl1="sin" data-lbl2="sin⁻¹">sin</button>
+            <button class="btn toggle-2nd text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-blue-950/40 hover:border-blue-500/50 rounded-lg text-xs md:text-sm font-semibold transition-all" data-key="2nd">2<sup>nd</sup></button>
+            <button class="btn text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-blue-950/40 hover:border-blue-500/50 rounded-lg text-sm transition-all" data-key="pi">π</button>
+            <button class="btn text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-blue-950/40 hover:border-blue-500/50 rounded-lg text-sm transition-all" data-key="e">e</button>
+            <button class="btn text-rose-400 bg-rose-950/20 border border-rose-900/50 hover:bg-rose-900/40 rounded-lg text-xs font-semibold transition-all" data-key="CE">CE</button>
+            <button class="btn text-amber-400 bg-amber-950/20 border border-amber-900/50 hover:bg-amber-900/40 rounded-lg text-sm transition-all" data-key="Backspace">⌫</button>
+
+            <!-- Fila 2 -->
+            <button class="btn switchable text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-blue-950/40 hover:border-blue-500/50 rounded-lg text-xs md:text-sm transition-all" data-key="cos" data-sec="acos" data-lbl1="cos" data-lbl2="cos⁻¹">cos</button>
+            <button class="btn switchable text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-blue-950/40 hover:border-blue-500/50 rounded-lg text-xs md:text-sm transition-all" data-key="x2" data-sec="x3" data-lbl1="x²" data-lbl2="x³">x²</button>
+            <button class="btn text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-blue-950/40 hover:border-blue-500/50 rounded-lg text-xs md:text-sm transition-all" data-key="1/x">1/x</button>
+            <button class="btn text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-blue-950/40 hover:border-blue-500/50 rounded-lg text-xs md:text-sm transition-all" data-key="abs">|x|</button>
+            <button class="btn text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-blue-950/40 hover:border-blue-500/50 rounded-lg text-xs md:text-sm transition-all" data-key="exp">exp</button>
+            <button class="btn text-blue-400 bg-slate-800/60 border border-slate-700/50 hover:bg-blue-950/40 rounded-lg text-xs md:text-sm transition-all" data-key="mod">mod</button>
+
+            <!-- Fila 3 -->
+            <button class="btn switchable text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-blue-950/40 hover:border-blue-500/50 rounded-lg text-xs md:text-sm transition-all" data-key="tan" data-sec="atan" data-lbl1="tan" data-lbl2="tan⁻¹">tan</button>
+            <button class="btn switchable text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-blue-950/40 hover:border-blue-500/50 rounded-lg text-xs md:text-sm transition-all" data-key="sqrt" data-sec="cbrt" data-lbl1="²√x" data-lbl2="³√x">²√x</button>
+            <button class="btn text-slate-400 bg-slate-800/20 border border-slate-800 rounded-lg text-sm transition-all" data-key="(">(</button>
+            <button class="btn text-slate-400 bg-slate-800/20 border border-slate-800 rounded-lg text-sm transition-all" data-key=")">)</button>
+            <button class="btn text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-blue-950/40 hover:border-blue-500/50 rounded-lg text-xs md:text-sm transition-all" data-key="fact">n!</button>
+            <button class="btn text-blue-400 bg-slate-800/60 border border-slate-700/50 hover:bg-blue-950/40 rounded-lg text-base transition-all" data-key="/">÷</button>
+
+            <!-- Bloque de Fox Fijo (Anclado exactamente en columna 1, cubriendo las últimas 4 filas) -->
+            <div class="col-start-1 row-start-4 row-span-4 bg-black/40 border border-slate-800 rounded-xl overflow-hidden p-1 flex items-center justify-center">
+                <img src="../assets/fox.jpg" alt="Rok" class="w-full h-full object-cover rounded-lg">
+            </div>
+            
+            <!-- Botones Fila 4 -->
+            <button class="btn switchable text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-blue-950/40 hover:border-blue-500/50 rounded-lg text-xs md:text-sm transition-all" data-key="xy" data-sec="yroot" data-lbl1="x<sup>y</sup>" data-lbl2="<sup>y</sup>√x">x<sup>y</sup></button>
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-base font-semibold transition-all" data-key="7">7</button>
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-base font-semibold transition-all" data-key="8">8</button>
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-base font-semibold transition-all" data-key="9">9</button>
+            <button class="btn text-blue-400 bg-slate-800/60 border border-slate-700/50 hover:bg-blue-950/40 rounded-lg text-base transition-all" data-key="*">×</button>
+
+            <!-- Botones Fila 5 -->
+            <button class="btn switchable text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-blue-950/40 hover:border-blue-500/50 rounded-lg text-xs md:text-sm transition-all" data-key="10x" data-sec="2x" data-lbl1="10<sup>x</sup>" data-lbl2="2<sup>x</sup>">10<sup>x</sup></button>
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-base font-semibold transition-all" data-key="4">4</button>
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-base font-semibold transition-all" data-key="5">5</button>
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-base font-semibold transition-all" data-key="6">6</button>
+            <button class="btn text-blue-400 bg-slate-800/60 border border-slate-700/50 hover:bg-blue-950/40 rounded-lg text-base transition-all" data-key="-">−</button>
+
+            <!-- Botones Fila 6 -->
+            <button class="btn switchable text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-blue-950/40 hover:border-blue-500/50 rounded-lg text-xs md:text-sm transition-all" data-key="log" data-sec="logyx" data-lbl1="log" data-lbl2="log<sub>y</sub>x">log</button>
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-base font-semibold transition-all" data-key="1">1</button>
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-base font-semibold transition-all" data-key="2">2</button>
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-base font-semibold transition-all" data-key="3">3</button>
+            <button class="btn text-blue-400 bg-slate-800/60 border border-slate-700/50 hover:bg-blue-950/40 rounded-lg text-base transition-all" data-key="+">+</button>
+
+            <!-- Botones Fila 7 -->
+            <button class="btn switchable text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-blue-950/40 hover:border-blue-500/50 rounded-lg text-xs md:text-sm transition-all" data-key="ln" data-sec="ex" data-lbl1="ln" data-lbl2="e<sup>x</sup>">ln</button>
+            <button class="btn text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-slate-750 rounded-lg text-xs md:text-sm transition-all" data-key="+/-">+/-</button>
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-base font-semibold transition-all" data-key="0">0</button>
+            <button class="btn text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-slate-750 rounded-lg text-sm transition-all" data-key=".">.</button>
+            <button class="btn equal text-emerald-400 bg-emerald-950/30 border border-emerald-500/40 hover:bg-emerald-500 hover:text-black rounded-lg text-lg font-bold shadow-[0_0_15px_rgba(16,185,129,0.1)] transition-all" data-key="Enter">=</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
