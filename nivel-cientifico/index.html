@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Rok - Científico & Programador</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-black to-slate-900 min-h-screen flex items-center justify-center p-4 transition-all duration-500">
+
+    <!-- Contenedor Principal con ID para mutación de Overclock -->
+    <div id="calc-card" class="w-full max-w-[400px] bg-slate-900/90 rounded-2xl p-5 border border-blue-500/30 shadow-[0_0_30px_rgba(30,58,138,0.4)] transition-all duration-500">
+           <!-- Barra superior: Navegación + Switch Overclock -->
+        <div class="flex justify-between items-center mb-4 gap-2">
+            <nav class="flex justify-around bg-black/50 rounded-xl p-1.5 border border-slate-800 flex-grow">
+                <a href="../" class="text-slate-400 hover:text-blue-400 text-[11px] font-medium px-2 py-1 rounded-lg transition-all">Inicio</a>
+                <a href="../nivel-basico/" class="text-slate-400 hover:text-blue-400 text-[11px] font-medium px-2 py-1 rounded-lg transition-all">Básico</a>
+                <a href="../nivel-avanzado/" class="text-slate-400 hover:text-blue-400 text-[11px] font-medium px-2 py-1 rounded-lg transition-all">Avanzado</a>
+                <a href="#" id="nav-active-pill" class="bg-blue-600 text-white text-[11px] font-semibold px-3 py-1 rounded-lg shadow-[0_0_10px_rgba(37,99,235,0.5)] transition-all duration-500">Científico</a>
+            </nav>
+            
+            <!-- Botón de Overclock Global -->
+            <button id="overclock-btn" class="bg-slate-950/80 border border-slate-800 text-slate-400 hover:text-rose-400 hover:border-rose-500/50 text-[10px] font-mono tracking-wider font-bold px-3 py-2.5 rounded-xl transition-all select-none flex items-center gap-1">
+                <span id="overclock-icon">⚡</span> <span id="overclock-text">OVERCLOCK</span>
+            </button>
+        </div>
+
+        <!-- Selector de Magnitud Física Personalizado -->
+        <div class="mb-4 relative">
+            <label class="block text-blue-500/80 text-[10px] font-mono tracking-widest uppercase mb-1.5 dynamic-label">Módulo / Magnitud</label>
+            <button id="category-btn" class="w-full bg-black/80 border border-slate-800 text-white text-sm font-mono rounded-xl p-3 text-left flex justify-between items-center focus:border-blue-500/50 transition-all select-none">
+                <span id="category-current">📏 Longitud</span>
+                <span class="text-blue-500 text-xs transition-transform duration-200 dynamic-text" id="category-arrow">▼</span>
+            </button>
+            <div id="category-options" class="hidden absolute left-0 right-0 mt-1.5 bg-slate-950/95 border border-slate-800 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.7)] z-50 overflow-hidden font-mono text-sm backdrop-blur-md">
+                <div class="p-3 hover:bg-blue-950/60 hover:text-blue-400 text-white cursor-pointer transition-all border-b border-slate-900/50" data-value="longitud">📏 Longitud</div>
+                <div class="p-3 hover:bg-blue-950/60 hover:text-blue-400 text-white cursor-pointer transition-all border-b border-slate-900/50" data-value="masa">⚖️ Masa / Peso</div>
+                <div class="p-3 hover:bg-blue-950/60 hover:text-blue-400 text-white cursor-pointer transition-all border-b border-slate-900/50" data-value="volumen">🧪 Volumen</div>
+                <div class="p-3 hover:bg-blue-950/60 hover:text-blue-400 text-white cursor-pointer transition-all border-b border-slate-900/50" data-value="temperatura">🌡️ Temperatura</div>
+                <div class="p-3 hover:bg-rose-950/40 hover:text-rose-400 text-amber-400 font-semibold cursor-pointer transition-all" data-value="sistema_numerico">💻 Sistema Numérico</div>
+            </div>
+        </div>
+
+        <!-- Pantalla de Entrada (Origen) -->
+        <div class="bg-black/60 rounded-xl p-3 mb-2 border border-slate-800/80 flex items-center justify-between relative">
+            <div class="relative min-w-[130px]">
+                <button id="unit-from-btn" class="bg-slate-950/60 border border-slate-800/50 rounded-lg px-2.5 py-1.5 text-blue-400 text-xs font-mono font-semibold text-left w-full flex justify-between items-center hover:border-blue-500/30 transition-all dynamic-text">
+                    <span id="unit-from-current" class="truncate">Metros (m)</span>
+                    <span>▼</span>
+                </button>
+                <div id="unit-from-options" class="hidden absolute left-0 mt-1.5 w-48 bg-slate-950/95 border border-slate-800 rounded-lg shadow-2xl z-50 max-h-48 overflow-y-auto text-xs font-mono text-white backdrop-blur-md"></div>
+            </div>
+            <div id="display-input" class="text-white text-2xl font-light font-mono tracking-tight truncate ml-2 text-right flex-grow select-none">0</div>
+        </div>
+
+        <!-- Pantalla de Salida (Destino) -->
+        <div id="display-output-container" class="bg-black/80 rounded-xl p-3 mb-5 border border-blue-500/20 shadow-[inset_0_2px_8px_rgba(0,0,0,0.8)] flex items-center justify-between relative transition-all duration-500">
+            <div class="relative min-w-[130px]">
+                <button id="unit-to-btn" class="bg-slate-950/60 border border-slate-800/50 rounded-lg px-2.5 py-1.5 text-emerald-400 text-xs font-mono font-semibold text-left w-full flex justify-between items-center hover:border-emerald-500/30 transition-all dynamic-output-text">
+                    <span id="unit-to-current" class="truncate">Kilómetros (km)</span>
+                    <span>▼</span>
+                </button>
+                <div id="unit-to-options" class="hidden absolute left-0 mt-1.5 w-48 bg-slate-950/95 border border-slate-800 rounded-lg shadow-2xl z-50 max-h-48 overflow-y-auto text-xs font-mono text-white backdrop-blur-md"></div>
+            </div>
+            <div id="display-output" class="text-emerald-400 text-2xl font-semibold font-mono tracking-tight truncate ml-2 text-right flex-grow select-none dynamic-output-text">0</div>
+        </div>
+
+        <!-- Rejilla Numérica de 4 Columnas -->
+        <div id="keypad-grid" class="grid grid-cols-4 gap-2 auto-rows-[48px] md:auto-rows-[54px]">
+            <button class="btn text-rose-400 bg-rose-950/20 border border-rose-900/50 hover:bg-rose-900/40 rounded-lg text-sm font-semibold transition-all" data-key="CLEAR">C</button>
+            <button class="btn text-amber-400 bg-amber-950/20 border border-amber-900/50 hover:bg-amber-900/40 rounded-lg text-sm transition-all" data-key="Backspace">⌫</button>
+            <button id="btn-toggle-sign" class="btn text-slate-400 bg-slate-800/20 border border-slate-800 rounded-lg text-sm transition-all" data-key="+/-">+/-</button>
+            
+            <!-- CONTENEDOR MUTANTE (FOTO FOX VS TECLADO HEXADECIMAL A-F) -->
+            <div class="row-span-2 bg-black/40 border border-slate-800 rounded-lg overflow-hidden p-0.5 flex items-center justify-center relative">
+                <!-- Componente Estático original -->
+                <img id="brand-fox" src="../assets/fox.jpg" alt="Rok Brand" class="w-full h-full object-cover rounded-md transition-all duration-350">
+                
+                <!-- Componente Avanzado Hexadecimal (Oculto por defecto) -->
+                <div id="hex-keypad" class="hidden absolute inset-0.5 p-0.5 grid grid-cols-2 gap-1 font-mono text-[11px]">
+                    <button class="btn hex-btn bg-slate-800/80 text-blue-400 border border-slate-700/30 hover:bg-slate-700 rounded transition-all font-bold" data-key="A">A</button>
+                    <button class="btn hex-btn bg-slate-800/80 text-blue-400 border border-slate-700/30 hover:bg-slate-700 rounded transition-all font-bold" data-key="B">B</button>
+                    <button class="btn hex-btn bg-slate-800/80 text-blue-400 border border-slate-700/30 hover:bg-slate-700 rounded transition-all font-bold" data-key="C">C</button>
+                    <button class="btn hex-btn bg-slate-800/80 text-blue-400 border border-slate-700/30 hover:bg-slate-700 rounded transition-all font-bold" data-key="D">D</button>
+                    <button class="btn hex-btn bg-slate-800/80 text-blue-400 border border-slate-700/30 hover:bg-slate-700 rounded transition-all font-bold" data-key="E">E</button>
+                    <button class="btn hex-btn bg-slate-800/80 text-blue-400 border border-slate-700/30 hover:bg-slate-700 rounded transition-all font-bold" data-key="F">F</button>
+                </div>
+            </div>
+
+            <!-- Botones numéricos estándar con data-key -->
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-lg font-semibold transition-all" data-key="7">7</button>
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-lg font-semibold transition-all" data-key="8">8</button>
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-lg font-semibold transition-all" data-key="9">9</button>
+
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-lg font-semibold transition-all" data-key="4">4</button>
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-lg font-semibold transition-all" data-key="5">5</button>
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-lg font-semibold transition-all" data-key="6">6</button>
+
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-lg font-semibold transition-all" data-key="1">1</button>
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-lg font-semibold transition-all" data-key="2">2</button>
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-lg font-semibold transition-all" data-key="3">3</button>
+
+            <button class="btn num text-white bg-slate-800 hover:bg-slate-700 border border-slate-700/40 rounded-lg text-lg font-semibold transition-all" data-key="0">0</button>
+            <button id="btn-dot" class="btn text-slate-300 bg-slate-800/40 border border-slate-700/50 hover:bg-slate-750 rounded-lg text-lg transition-all" data-key=".">.</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

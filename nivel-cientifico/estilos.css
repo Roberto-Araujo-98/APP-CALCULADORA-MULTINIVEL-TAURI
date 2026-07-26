@@ -1,0 +1,19 @@
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    user-select: none;
+}
+
+/* Ocultar las flechas por defecto de los selectores para un look más integrado en sistemas operativos */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#display-input, #display-output {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
