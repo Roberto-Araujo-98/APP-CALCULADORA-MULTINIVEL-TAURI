@@ -1,0 +1,19 @@
+/* --- Utilidades estructurales complementarias a Tailwind --- */
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    user-select: none;
+}
+
+/* Brillo neón verde profesional en el hover del botón igual */
+.equal:hover {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
+}
+
+/* Limpieza de suavizado de fuentes monoespaciadas */
+#display, #history {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

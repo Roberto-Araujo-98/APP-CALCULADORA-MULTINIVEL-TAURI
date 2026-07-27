@@ -1,0 +1,30 @@
+/* --- Ajustes de Flexibilidad y Centrado de Contenidos --- */
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    user-select: none;
+}
+
+/* --- Estados Especiales de Activación Lumínica (Neon Look) --- */
+
+/* Estilo exacto del botón 2nd encendido en Verde Neón */
+.toggle-2nd.active {
+    background-color: #10b981 !important; /* emerald-500 */
+    border-color: #34d399 !important;     /* emerald-400 */
+    color: #000000 !important;
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+}
+
+/* Brillo extra al pasar el cursor sobre el operador de asignación (=) */
+.equal:hover {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
+}
+
+/* Corrección de renderizado en subíndices/superíndices de botones de ingeniería */
+.btn sub, .btn sup {
+    font-size: 0.65rem;
+    line-height: 0;
+}
