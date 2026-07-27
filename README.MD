@@ -20,26 +20,32 @@ Aplicación de escritorio multiplataforma (**Windows** y **Linux**) basada en un
 * Tener instalado el CLI de Tauri:
   ```bash
   cargo install tauri-cli --version "^2.0.0"
-Pasos para ejecutar
+
+### Pasos para ejecutar
+
 Clonar el repositorio:
 
+
 git clone [https://github.com/Roberto-Araujo-98/APP-CALCULADORA-MULTINIVEL-TAURI.git](https://github.com/Roberto-Araujo-98/APP-CALCULADORA-MULTINIVEL-TAURI.git)
+
 cd APP-CALCULADORA-MULTINIVEL-TAURI
 (Opcional) Regenerar íconos de la aplicación:
 Si actualizas la imagen fuente fox.png, puedes regenerar los íconos automáticamente corriendo:
 
 
 cargo tauri icon fox.png
-Ejecutar en modo desarrollo:
+
+### Ejecutar en modo desarrollo:
 
 
 cargo tauri dev
 📦 Compilación (Build)
 Para generar el ejecutable e instalador nativo (.exe / .msi en Windows o .deb / .AppImage en Linux), ejecuta:
 
-
 cargo tauri build
-Los instaladores finales se generarán automáticamente en la carpeta:
+
+### Los instaladores finales se generarán automáticamente en la carpeta:
 
 
 src-tauri/target/release/bundle/
+
