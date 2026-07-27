@@ -4,16 +4,21 @@
   "version": "0.1.0",
   "identifier": "com.tauri.dev",
   "build": {
-    "frontendDist": "../"
+    "frontendDist": "../www"
   },
   "app": {
     "windows": [
       {
-        "title": "Calculadora Rok - Sistema Modular",
-        "width": 800,
-        "height": 600,
+     "title": "Calculadora Rok - Sistema Modular",
+        "width": 460,
+        "height": 680,
+        "minWidth": 420,
+        "minHeight": 620,
+        "maxWidth": 600,
+        "maxHeight": 850,
         "resizable": true,
-        "fullscreen": false
+        "center": true,
+        "backgroundColor": "#05070c"
       }
     ],
     "security": {
