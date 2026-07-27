@@ -39,7 +39,8 @@ cargo tauri icon fox.png
 
 
 cargo tauri dev
-📦 Compilación (Build)
+
+#### 📦 Compilación (Build)
 Para generar el ejecutable e instalador nativo (.exe / .msi en Windows o .deb / .AppImage en Linux), ejecuta:
 
 cargo tauri build
