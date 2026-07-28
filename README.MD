@@ -50,3 +50,4 @@ cargo tauri build
 
 src-tauri/target/release/bundle/
 
+---
