@@ -1,1 +1,0 @@
-print("mosquito mosquito")
