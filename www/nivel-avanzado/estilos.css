@@ -28,3 +28,23 @@
     font-size: 0.65rem;
     line-height: 0;
 }
+/* Este es el contenedor de la "torre" */
+.logo-stack-cell {
+  display: flex; /* Habilitamos Flexbox */
+  flex-direction: column; /* Apilamos en columna (una encima de otra) */
+  height: 100%; /* Hacemos que ocupe todo el alto del botón */
+  width: 100%; /* Hacemos que ocupe todo el ancho del botón */
+  overflow: hidden; /* Evitamos que las imágenes se salgan de los bordes redondeados */
+  border-radius: 12px; /* Asegúrate de que coincida con el borde de tus otros botones */
+}
+
+/* Estas reglas aplican a las 3 imágenes dentro */
+.logo-stack-cell img {
+  flex: 1; /* Cada imagen toma exactamente 1/3 del alto disponible */
+  width: 100%; /* Que ocupe todo el ancho del botón */
+  height: auto; /* Mantener la proporción al ajustar ancho */
+  object-fit: contain; /* ¡ESTA ES LA CLAVE! 
+                        Ajusta la imagen COMPLETA dentro de su espacio, 
+                        sin cortarla, añadiendo espacio a los lados si es necesario. */
+  background-color: transparent; /* Fondo limpio para el espacio extra */
+}
